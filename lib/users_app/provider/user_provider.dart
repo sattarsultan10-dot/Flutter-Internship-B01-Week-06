@@ -22,8 +22,7 @@ class UserProvider extends ChangeNotifier {
 
   // Add User
   Future<void> addUser(UserModel user) async {
-    final newUser = await apiService.addUser(user);
-    users.add(newUser);
+    users.add(await apiService.addUser(user));
     notifyListeners();
   }
 

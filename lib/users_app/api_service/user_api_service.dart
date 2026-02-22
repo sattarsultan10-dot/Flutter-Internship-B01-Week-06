@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:week_06/users_app/model/user_model.dart';
 
@@ -18,15 +17,17 @@ class UserApiService {
   Future<UserModel> addUser(UserModel user) async {
     final user_Response = await http.post(
       Uri.parse(baseURLs),
-      headers: {"Content-Type": "applicatoin/json"},
+      headers: {"Content-Type": "application/json"},
       body: jsonEncode(user.toJson()),
     );
     return UserModel.fromJson(jsonDecode(user_Response.body));
   }
 
   Future<void> deleteUser(int id) async {
-    final user_Response = await http.delete(Uri.parse(baseURLs));
-    if (user_Response.statusCode != 200 && user_Response.statusCode != 204) {
+    final user_Response = await http.delete(Uri.parse("$baseURLs/$id"));
+    if (user_Response.statusCode == 200 || user_Response.statusCode == 204) {
+      //sucess
+    } else {
       throw Exception('Failed to delete the user');
     }
   }
