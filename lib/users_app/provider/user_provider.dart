@@ -14,7 +14,8 @@ class UserProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    users = await apiService.fetchUsers();
+    users = await apiService
+        .fetchUsers(); // Replace the old list with the new list.
 
     isLoading = false;
     notifyListeners();
@@ -22,14 +23,20 @@ class UserProvider extends ChangeNotifier {
 
   // Add User
   Future<void> addUser(UserModel user) async {
-    users.add(await apiService.addUser(user));
+    users.add(
+      await apiService.addUser(user),
+    ); // Just add one user to the existing list.
     notifyListeners();
   }
 
   // Delete User
   Future<void> deleteUser(int id) async {
-    await apiService.deleteUser(id);
-    users.removeWhere((u) => u.id == id);
+    await apiService.deleteUser(
+      id,
+    ); //Send request to user to delete the user with that id.
+    users.removeWhere(
+      (u) => u.id == id,
+    ); //Delete that user from your local list.
     notifyListeners();
   }
 

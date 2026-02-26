@@ -8,7 +8,7 @@
             "name": "week_06",
             "request": "launch",
             "type": "dart",
-            "program": "lib/image_upload_app/main.dart"
+            "program": "lib/crud_api_app/main.dart"
         },
         {
             "name": "week_06 (profile mode)",
